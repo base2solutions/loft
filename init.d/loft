@@ -1,6 +1,6 @@
 #!/bin/sh
 #
-# loft      Init script for starting iJet logging filter transmit
+# loft      Init script for starting loft
 # 
 # Author:       andrew.hosch@base2s.com
 #
@@ -8,9 +8,9 @@
 # chkconfig: - 98 02
 
 NAME=loft
-LOFT_DIR=/ijet/loft
+LOFT_DIR=/loft
 LOFT_LOG=/var/log/messages
-export PYTHONPATH=${PYTHONPATH}:/ijet
+export PYTHONPATH=${PYTHONPATH}:/loft
 CMD=/usr/bin/python
 ARGS=${LOFT_DIR}/LoftEngine.py
 PID_FILE=/var/run/${NAME}.pid

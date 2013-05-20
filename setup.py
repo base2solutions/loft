@@ -11,5 +11,5 @@ setup(
     description='Logging Filter Transport',
     long_description=open('README.txt').read(),
     requires=['requests'],
-    install_lib='/ijet/',
+    install_lib='/loft/',
     )
