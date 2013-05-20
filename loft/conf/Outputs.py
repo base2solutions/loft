@@ -1,6 +1,8 @@
 # Implement methods for posting to an arbitrary location here. This code can do almost anything desired so long as
 # the input is a string.
 
+
+#Example implementation of outputting to a RESTful interface.
 def postJson(msg):
     import requests
     import json
@@ -33,5 +35,6 @@ def postJson(msg):
         logger.error("Post to producer failed. Dropping message " + jsonMsg)
 
 
+#Implementation for outputting to stdout
 def postToStdOut(msg):
     print msg
