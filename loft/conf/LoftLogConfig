@@ -1,0 +1,22 @@
+[loggers]
+keys=root
+
+[handlers]
+keys=fileHandler
+
+[formatters]
+keys=rootFormatter
+
+[logger_root]
+level=DEBUG
+handlers=fileHandler
+
+[handler_fileHandler]
+class=logging.handlers.RotatingFileHandler
+level=DEBUG
+formatter=rootFormatter
+#args=('/var/log/loft.log', 'a', 1000000, 10, )
+args=('loft.log', 'a', 1000000, 10, )
+
+[formatter_rootFormatter]
+format=%(asctime)s %(levelname)s:loft: (%(threadName)-10s) %(message)s

@@ -1,0 +1,84 @@
+#!/bin/sh
+#
+# loft      Init script for starting iJet logging filter transmit
+# 
+# Author:       andrew.hosch@base2s.com
+#
+#
+# chkconfig: - 98 02
+
+NAME=loft
+LOFT_DIR=/ijet/loft
+LOFT_LOG=/var/log/messages
+export PYTHONPATH=${PYTHONPATH}:/ijet
+CMD=/usr/bin/python
+ARGS=${LOFT_DIR}/LoftEngine.py
+PID_FILE=/var/run/${NAME}.pid
+LOCK_FILE=/var/lock/subsys/${NAME}
+DAEMON_OPTS="--pidfile ${PID_FILE}"
+RETVAL=0
+LOGGER=/usr/bin/logger
+
+. /etc/rc.d/init.d/functions
+
+do_start() {
+    echo "Starting ${NAME}."
+	$LOGGER -t ${NAME} "Starting ${NAME}."
+    if [ -f ${LOCK_FILE} ]; then
+        echo "Service already running."
+		$LOGGER -t ${NAME} "Service already running."
+        return 1
+    fi
+	cd /tmp
+    nohup ${CMD} ${ARGS} >/dev/null 2>&1 &
+    RETVAL=$?
+    [ "$RETVAL" = 0 ] && touch ${LOCK_FILE}
+    return $RETVAL
+}
+
+do_stop() {
+    echo -n "Stopping ${NAME}."
+	$LOGGER -t ${NAME} "Stopping ${NAME}."
+    pid=`ps wwwax | grep LoftEngine.py | grep -v grep | head -c 5`
+    if [ $pid ]; then
+	kill $pid
+    fi
+    RETVAL=$?
+    echo
+    [ "$RETVAL" = 0 ] && rm -f ${LOCK_FILE} ${PID_FILE}
+    return $RETVAL
+}
+
+do_status() {
+    if [ -f ${LOCK_FILE} ]; then
+        pid=`ps wwwax | grep LoftEngine.py | grep -v grep | head -c 5`
+        echo "${NAME} running on pid: ${pid}"
+		$LOGGER -t ${NAME} "${NAME} running on pid: ${pid}"
+	RETVAL=$?
+    else
+        echo "${NAME} is not running."
+		$LOGGER -t ${NAME} "${NAME} is not running."
+	RETVAL=1
+    fi
+    return $RETVAL
+}
+
+case "$1" in
+    start)
+        do_start
+        ;;
+    stop)
+        do_stop
+        ;;
+    restart)
+        do_stop
+        do_start
+        ;;
+    status)
+        do_status
+        ;;
+    *)
+        echo $"Usage: init.sh {start|stop|restart}"
+        exit 1
+esac
+
