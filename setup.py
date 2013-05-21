@@ -11,5 +11,5 @@ setup(
     description='Logging Filter Transport',
     long_description=open('README.txt').read(),
     requires=['requests'],
-    install_lib='/loft/',
-    )
+    url='https://github.com/mbrewster/loft',    
+)
