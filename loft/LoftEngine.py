@@ -22,8 +22,8 @@ class LoftEngine(object):
     def __init__(self):
         object.__init__(self)
         # Getting application logging details
-        #logging.config.fileConfig('/ijet/loft/conf/LoftLogConfig')
-        logging.config.fileConfig('conf/LoftLogConfig')
+        logging.config.fileConfig('/loft/loft/conf/LoftLogConfig')
+        #logging.config.fileConfig('conf/LoftLogConfig')
         self.logger = logging.getLogger()
         # PID for an init script to note
         self.loftPID = loftPID
