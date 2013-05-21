@@ -4,7 +4,6 @@ import Tailer
 import Producer
 import FilterEngine
 from loft.conf.Config import logFileNames
-from loft.conf.Config import propUrl
 
 # loft application config
 import logging.config
