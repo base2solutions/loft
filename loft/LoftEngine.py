@@ -45,7 +45,7 @@ class LoftEngine(object):
         outQueue = Queue.Queue()
 
         #start producer
-        m = Producer.Producer(outQueue, propUrl)
+        m = Producer.Producer(outQueue)
         m.daemon = True
         m.start()
 
