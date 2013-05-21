@@ -10,7 +10,7 @@
 NAME=loft
 LOFT_DIR=/loft
 LOFT_LOG=/var/log/messages
-export PYTHONPATH=${PYTHONPATH}:/loft
+export PYTHONPATH=${PYTHONPATH}:/loft:/loft/loft
 CMD=/usr/bin/python
 ARGS=${LOFT_DIR}/LoftEngine.py
 PID_FILE=/var/run/${NAME}.pid
