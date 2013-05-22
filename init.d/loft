@@ -8,7 +8,7 @@
 # chkconfig: - 98 02
 
 NAME=loft
-LOFT_DIR=/loft
+LOFT_DIR=/loft/loft
 LOFT_LOG=/var/log/messages
 export PYTHONPATH=${PYTHONPATH}:/loft:/loft/loft
 CMD=/usr/bin/python
