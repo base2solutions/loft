@@ -8,11 +8,9 @@
 # chkconfig: - 98 02
 
 NAME=loft
-LOFT_DIR=/loft/loft
 LOFT_LOG=/var/log/messages
-export PYTHONPATH=${PYTHONPATH}:/loft:/loft/loft
 CMD=/usr/bin/python
-ARGS=${LOFT_DIR}/LoftEngine.py
+ARGS=-m loft.FilterEngine
 PID_FILE=/var/run/${NAME}.pid
 LOCK_FILE=/var/lock/subsys/${NAME}
 DAEMON_OPTS="--pidfile ${PID_FILE}"
