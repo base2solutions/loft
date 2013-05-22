@@ -10,7 +10,7 @@
 NAME=loft
 LOFT_LOG=/var/log/messages
 CMD=/usr/bin/python
-ARGS=-m loft.FilterEngine
+ARGS="-m loft.FilterEngine"
 PID_FILE=/var/run/${NAME}.pid
 LOCK_FILE=/var/lock/subsys/${NAME}
 DAEMON_OPTS="--pidfile ${PID_FILE}"
