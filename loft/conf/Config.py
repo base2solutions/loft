@@ -18,4 +18,4 @@ loftPID = '/var/run/loft.pid'
 #Implement the logic to be executed on msg delivery. Implementations should be defined in Outputs.py
 def outputMethod(msg):
     import Outputs
-    Outputs.postToStdOut(msg)
+    Outputs.writeToFile(msg)
