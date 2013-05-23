@@ -21,7 +21,7 @@ class LoftEngine(object):
     def __init__(self):
         object.__init__(self)
         # Getting application logging details
-        logging.config.fileConfig(os.getcwd() + '/conf/LoftLogConfig')
+        logging.config.fileConfig(os.path.abspath(os.path.dirname(__file__)) + '/conf/LoftLogConfig')
         self.logger = logging.getLogger()
         # PID for an init script to note
         self.loftPID = loftPID
