@@ -42,6 +42,6 @@ def postToStdOut(msg):
 
 #Implementation for outputting to a file
 def writeToFile(msg):
-    fo = open("/path/to/file.txt", "wb")
-    fo.write(msg + "\n")
+    fo = open("/path/to/file.txt", "a")
+    fo.write(msg)
     fo.close()
