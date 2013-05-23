@@ -10,7 +10,7 @@
 NAME=loft
 LOFT_LOG=/var/log/messages
 CMD=/usr/bin/python
-ARGS="-m loft.FilterEngine"
+ARGS="-m loft.LoftEngine"
 PID_FILE=/var/run/${NAME}.pid
 LOCK_FILE=/var/lock/subsys/${NAME}
 DAEMON_OPTS="--pidfile ${PID_FILE}"
@@ -37,7 +37,7 @@ do_start() {
 do_stop() {
     echo -n "Stopping ${NAME}."
 	$LOGGER -t ${NAME} "Stopping ${NAME}."
-    pid=`ps wwwax | grep LoftEngine.py | grep -v grep | head -c 5`
+    pid=`ps wwwax | grep loft.LoftEngine | grep -v grep | head -c 5`
     if [ $pid ]; then
 	kill $pid
     fi
@@ -49,7 +49,7 @@ do_stop() {
 
 do_status() {
     if [ -f ${LOCK_FILE} ]; then
-        pid=`ps wwwax | grep LoftEngine.py | grep -v grep | head -c 5`
+        pid=`ps wwwax | grep loft.LoftEngine | grep -v grep | head -c 5`
         echo "${NAME} running on pid: ${pid}"
 		$LOGGER -t ${NAME} "${NAME} running on pid: ${pid}"
 	RETVAL=$?
