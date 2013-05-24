@@ -25,8 +25,8 @@ stateStatusMsgNotMet = "State inspector conditions NOT met"
 
 #At a minimum should contain a match for the state status messages
 outgoingFilter = {
-    '01_allow_met': 'State inspector conditions met',
-    '02_allow_not_met': 'State inspector conditions NOT met'
+    '01_allow_met': '.*State inspector conditions met.*',
+    '02_allow_not_met': '.*State inspector conditions NOT met.*'
 }
 
 

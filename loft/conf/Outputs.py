@@ -38,3 +38,10 @@ def postJson(msg):
 #Implementation for outputting to stdout
 def postToStdOut(msg):
     print msg
+
+
+#Implementation for outputting to a file
+def writeToFile(msg):
+    fo = open("/path/to/file.txt", "a")
+    fo.write(msg + "\n")
+    fo.close()

@@ -8,6 +8,7 @@ from loft.conf.Filters import outgoingFilter
 from loft.conf.Filters import stateStatusMsgMet
 from loft.conf.Filters import stateStatusMsgNotMet
 from loft.conf.Config import ttl
+from threading import Timer
 
 class Filter(object):
 
@@ -39,6 +40,9 @@ class Filter(object):
         self.initializationTime = time.time()
         self.inspectorMsgSent = False
 
+        #Schedule the ttl event
+        Timer(ttl, self.stateInspectorTtlCheck, ()).start()
+
         #while True:
         if runOnce is True:
             while self.inQueue.qsize() != 0:
@@ -56,6 +60,11 @@ class Filter(object):
                     #cleanup
                     self.logger.warn('Shut down by keyboard')
                     sys.exit()
+
+    def stateInspectorTtlCheck(self):
+        if not self.inspectorMsgSent:
+            self.__sendToProducer(stateStatusMsgNotMet)
+            self.inspectorMsgSent = True
 
     def stateInspector(self, logLine, ttl):
         """
@@ -76,8 +85,6 @@ class Filter(object):
                 #Hit condition that we should send status
                 if self.__evaluateSmartFilterStatus() is True:
                     self.__sendToProducer(stateStatusMsgMet)
-                else:
-                    self.__sendToProducer(stateStatusMsgNotMet)
 
                 #Set some flag to status sent so we don't smartFilter any more
                 self.inspectorMsgSent = True

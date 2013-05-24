@@ -4,7 +4,6 @@ import Tailer
 import Producer
 import FilterEngine
 from loft.conf.Config import logFileNames
-from loft.conf.Config import propUrl
 
 # loft application config
 import logging.config
@@ -22,8 +21,7 @@ class LoftEngine(object):
     def __init__(self):
         object.__init__(self)
         # Getting application logging details
-        #logging.config.fileConfig('/ijet/loft/conf/LoftLogConfig')
-        logging.config.fileConfig('conf/LoftLogConfig')
+        logging.config.fileConfig(os.path.abspath(os.path.dirname(__file__)) + '/conf/LoftLogConfig')
         self.logger = logging.getLogger()
         # PID for an init script to note
         self.loftPID = loftPID
@@ -46,7 +44,7 @@ class LoftEngine(object):
         outQueue = Queue.Queue()
 
         #start producer
-        m = Producer.Producer(outQueue, propUrl)
+        m = Producer.Producer(outQueue)
         m.daemon = True
         m.start()
 
