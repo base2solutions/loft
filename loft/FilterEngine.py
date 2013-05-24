@@ -64,6 +64,7 @@ class Filter(object):
     def stateInspectorTtlCheck(self):
         if not self.inspectorMsgSent:
             self.__sendToProducer(stateStatusMsgNotMet)
+            self.inspectorMsgSent = True
 
     def stateInspector(self, logLine, ttl):
         """
