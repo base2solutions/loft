@@ -1,8 +1,8 @@
-#path to log files to tail
+#path to log files to tail. Must be absolute paths.
 logFileNames = [
-    "test/testlog1.log",
-    "test/testlog2.log",
-    "test/testlog3.log",
+    "/path/to/testlog1.log",
+    "/path/to/testlog2.log",
+    "/path/to/testlog3.log",
 ]
 
 #State inspector TTL in seconds
